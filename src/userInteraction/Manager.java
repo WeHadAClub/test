@@ -8,8 +8,8 @@ import commands.managers.CommandManager;
 
 public class Manager {
     private InputHandler t1;
-    private CommandManager commM;
-    private CollectionManager collM;
+    private final CommandManager commM;
+    private final CollectionManager collM;
 
     {
         try{
@@ -35,7 +35,7 @@ public class Manager {
             if(commM.isCommand(input[0])){
                 command = commM.getCommand(input[0]);
                 command.execute(collM);
-            };
+            }
 
         }
     }
