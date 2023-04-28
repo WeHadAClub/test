@@ -1,0 +1,19 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<MusicBandCatalog>
+    <MusicBand>
+        <name>Мираж</name>
+        <coordinates>
+            <x></x>
+            <y>5</y>
+        </coordinates>
+        <creationDate> </creationDate>
+        <numberOfParticipants>8</numberOfParticipants>
+        <albumsCount>5</albumsCount>
+        <description>советская и российская музыкальная группа в стиле евродиско.</description>
+        <genre>POST_PUNK</genre>
+        <bestAlbum>
+            <name>Звезды нас ждут</name>
+            <length>9</length>
+        </bestAlbum>
+    </MusicBand>
+</MusicBandCatalog>
