@@ -1,9 +1,12 @@
 package commands.managers;
 
 import commands.ExitCommand;
+import commands.HelpCommand;
+import commands.InfoCommand;
 import commands.InsertCommand;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class CommandManager {
@@ -11,6 +14,9 @@ public class CommandManager {
 
     public CommandManager() {
         commandMap.put("exit", new ExitCommand());
+        commandMap.put("insert", new InsertCommand());
+        commandMap.put("help", new HelpCommand());
+        commandMap.put("info", new InfoCommand());
     }
 
     /**
@@ -30,6 +36,13 @@ public class CommandManager {
 
     public Command getCommand(String com){
         return commandMap.get(com);
+    }
+    public void getDescriptions(){
+        for(Map.Entry<String, Command> entry: commandMap.entrySet()) {
+            // get command
+            Command value = entry.getValue();
+            System.out.println("* " + value.descr());
+        }
     }
 
 }

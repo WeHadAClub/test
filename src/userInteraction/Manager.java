@@ -1,16 +1,18 @@
 package userInteraction;
 
-import java.io.IOException;
 import collection.CollectionManager;
 import commands.managers.Command;
-import commands.managers.CommandList;
 import commands.managers.CommandManager;
+import userInteraction.input.InputHandler;
+import userInteraction.input.ReadBase;
+import java.io.IOException;
+
 
 public class Manager {
     private InputHandler t1;
     private final CommandManager commM;
     private final CollectionManager collM;
-
+    String[] input;
     {
         try{
             t1 = new InputHandler(new ReadBase(System.in));
@@ -19,22 +21,29 @@ public class Manager {
             e.getStackTrace();
         }
         commM = new CommandManager();
-        collM = new CollectionManager();
+        collM = new CollectionManager(this, t1, commM);
     }
-
     public Manager(){
 
+    }
+    public String[] getInput(){
+        return input;
     }
 
     public void start(){
         System.out.println("Привет! \nВведи 'help', чтобы увидеть список комманд. ");
-        String[] input;
         Command command;
         while(true){
+            System.out.println("Введите комманду: ");
             input = t1.read();
-            if(commM.isCommand(input[0])){
-                command = commM.getCommand(input[0]);
-                command.execute(collM);
+            try {
+                if(commM.isCommand(input[0])){
+                    command = commM.getCommand(input[0]);
+                    command.execute(collM);
+                }
+            }
+            catch (ArrayIndexOutOfBoundsException e){
+                System.out.println("Вы ввели пустую строку");
             }
 
         }

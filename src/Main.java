@@ -1,3 +1,5 @@
+import collection.baseClasses.MusicBand;
+import collection.baseClasses.MusicGenre;
 import commands.managers.CommandList;
 import userInteraction.*;
 

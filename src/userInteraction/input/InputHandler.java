@@ -1,4 +1,4 @@
-package userInteraction;
+package userInteraction.input;
 import javax.xml.parsers.*;
 import org.xml.sax.*;
 import org.w3c.dom.*;
@@ -22,8 +22,9 @@ public class InputHandler{
             words = handler.read().split(" ");
             return words;
         }
-        catch (IOException e){
-            e.getStackTrace();
+        catch (NullPointerException e){
+            return new String[0];
+        } catch (IOException e) {
             return new String[0];
         }
     }

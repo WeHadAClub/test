@@ -1,4 +1,4 @@
-package userInteraction;
+package userInteraction.input;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,8 +40,12 @@ public class ReadBase {
                 str += test;
             }
         }
-
-        return str;
+        if(!str.equals("\n")){
+            return str;
+        }
+        else{
+            return null;
+        }
     }
 
 
