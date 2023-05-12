@@ -71,4 +71,8 @@ public class MusicBand {
     public void setFrontMan(Person frontMan) {
         this.frontMan = frontMan;
     }
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
 }

@@ -1,9 +1,6 @@
 package commands.managers;
 
-import commands.ExitCommand;
-import commands.HelpCommand;
-import commands.InfoCommand;
-import commands.InsertCommand;
+import commands.*;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,6 +14,7 @@ public class CommandManager {
         commandMap.put("insert", new InsertCommand());
         commandMap.put("help", new HelpCommand());
         commandMap.put("info", new InfoCommand());
+        commandMap.put("save", new SaveCommand());
     }
 
     /**

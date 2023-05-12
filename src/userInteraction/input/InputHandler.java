@@ -28,41 +28,4 @@ public class InputHandler{
             return new String[0];
         }
     }
-    /**
-     * reading data from a xml file
-     */
-    public void readXmlFile(String fileName){
-        try {
-            // Создается построитель документа
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            // Создается дерево DOM документа из файла
-            Document document = documentBuilder.parse(fileName);
-
-            // Получаем корневой элемент
-            Node root = document.getDocumentElement();
-            // Просматриваем все подэлементы корневого
-            NodeList musicbands = root.getChildNodes();
-            for (int i = 0; i < musicbands.getLength(); i++) {
-                Node music = musicbands.item(i);
-                // Если нода не текст, то это музыкальная группа - заходим внутрь
-                if (music.getNodeType() != Node.TEXT_NODE) {
-                    NodeList musicProps = music.getChildNodes();
-                    for (int j = 0; j < musicProps.getLength(); j++) {
-                        Node musicProp = musicProps.item(j);
-                        // Если нода не текст, то это один из параметров
-                        if (musicProp.getNodeType() != Node.TEXT_NODE) {
-                            System.out.println(musicProp.getChildNodes().item(0).getTextContent());
-                        }
-                    }
-                }
-
-            }
-        }
-        catch (IOException e) {
-            System.out.println("Упс... возможно ты ввел неверный путь или указал несуществующий xml файл. \n Попробуй еще раз: ");
-        }
-        catch (ParserConfigurationException | SAXException e) {
-            System.out.println("Упс... это не твоя вина. Попробуй еще раз");
-        }
-    }
 }

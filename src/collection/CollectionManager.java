@@ -3,6 +3,8 @@ package collection;
 import collection.baseClasses.MusicBand;
 import commands.managers.CommandManager;
 import exeptions.NoKeyExeptions;
+import fileInteraction.MapToXML;
+import fileInteraction.XMLToMap;
 import userInteraction.CTInput;
 import userInteraction.Manager;
 import userInteraction.input.InputHandler;
@@ -19,16 +21,22 @@ public class CollectionManager {
     private final InputHandler t2;
     private final CommandManager cM;
     private java.time.LocalDateTime creationDate;
-    public CollectionManager(Manager main, InputHandler t1, CommandManager cM) {
+    private MapToXML mtx;
+    public CollectionManager(Manager main, InputHandler t1, CommandManager cM, MapToXML mtx) {
         mainManager = main;
         checker = new CTInput();
         t2 = t1;
         this.cM = cM;
+        this.mtx = mtx;
         creationDate = LocalDateTime.now();
     }
 
     public void help(){
         cM.getDescriptions();
+    }
+    public void save(){
+        mtx.createFile(mainManager.getInput()[1], musicBandCatalogue);
+        System.out.println("Коллекция сохранена в файл.");
     }
     public void info(){
         System.out.println("Коллекция музыкальных коллективов");
@@ -36,6 +44,7 @@ public class CollectionManager {
                 "Дата создания коллекции - " + creationDate + "\n" +
                 "Количество элементов - " + musicBandCatalogue.size());
     }
+
     public void add() throws NoKeyExeptions {
         String[] input = mainManager.getInput();
         if(input.length == 1) throw new NoKeyExeptions();
@@ -61,6 +70,7 @@ public class CollectionManager {
             }
         }
     }
+
 
     public void exit(){
         System.out.println("Завершаем работу");

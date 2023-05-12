@@ -40,8 +40,9 @@ public class ReadBase {
                 str += test;
             }
         }
-        if(!str.equals("\n")){
+        if(!str.equals("\n")) {
             return str;
+
         }
         else{
             return null;

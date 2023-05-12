@@ -3,31 +3,43 @@ package userInteraction;
 import collection.CollectionManager;
 import commands.managers.Command;
 import commands.managers.CommandManager;
+import fileInteraction.MapToXML;
+import fileInteraction.XMLToMap;
 import userInteraction.input.InputHandler;
 import userInteraction.input.ReadBase;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 
 public class Manager {
-    private InputHandler t1;
+    private InputHandler tNow;
     private final CommandManager commM;
     private final CollectionManager collM;
+    private MapToXML mtx;
     String[] input;
     {
         try{
-            t1 = new InputHandler(new ReadBase(System.in));
+            tNow = new InputHandler(new ReadBase(System.in));
         }
         catch (IOException e){
             e.getStackTrace();
         }
         commM = new CommandManager();
-        collM = new CollectionManager(this, t1, commM);
+        mtx = new MapToXML();
+        collM = new CollectionManager(this, tNow, commM, mtx);
     }
-    public Manager(){
-
+    public Manager(String file){
+        initlReading(file);
     }
     public String[] getInput(){
         return input;
+    }
+    public void initlReading(String file){
+        XMLToMap xml = new XMLToMap();
+        xml.readXmlFile(file);
     }
 
     public void start(){
@@ -35,7 +47,7 @@ public class Manager {
         Command command;
         while(true){
             System.out.println("Введите комманду: ");
-            input = t1.read();
+            input = tNow.read();
             try {
                 if(commM.isCommand(input[0])){
                     command = commM.getCommand(input[0]);
