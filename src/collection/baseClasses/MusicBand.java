@@ -1,15 +1,18 @@
 package collection.baseClasses;
 
-import collection.baseClasses.Coordinates;
-import collection.baseClasses.MusicGenre;
-import collection.baseClasses.Person;
 
 import java.time.LocalDateTime;
 
-public class MusicBand {
+public class MusicBand implements Comparable<MusicBand>{
+
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
     private java.time.LocalDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private Long numberOfParticipants; //Поле может быть null, Значение поля должно быть больше 0
     private MusicGenre genre; //Поле может быть null
@@ -30,11 +33,9 @@ public class MusicBand {
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -75,4 +76,17 @@ public class MusicBand {
         return creationDate;
     }
 
+    @Override
+    public int compareTo(MusicBand o) {
+        return (int) (getId() - o.getId());
+    }
+
+    @Override
+    public String toString() {
+        return "Называние музыкальной группы: " + getName() + "" +
+                "\nID музыкальной группы: " + getId() + "" +
+                "\nЖанр: " + getGenre() +"" +
+                "\nДата создания группы: " + getCreationDate() + "" +
+                "\nИмя вокалиста: " + getFrontMan().getName() + "\n";
+    }
 }

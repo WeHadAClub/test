@@ -29,9 +29,9 @@ public class MapToXML {
 
             writer.println("<?xml version=\"1.1\" encoding=\"UTF-8\" ?>");
             writer.println();
-            writer.println("<MusicBandCatalog>");
+            writer.println("<musicbandcatalog>");
             writeToFile(writer, map);
-            writer.println("</MusicBandCatalog>");
+            writer.println("</musicbandcatalog>");
             writer.close();
 
         } catch (FileNotFoundException |ArrayIndexOutOfBoundsException e) {
@@ -60,7 +60,7 @@ public class MapToXML {
     public void writeToFile(PrintWriter writer, Map<Integer, MusicBand> map){
         for(Map.Entry<Integer, MusicBand> entry: map.entrySet()) {
             MusicBand mB = entry.getValue();
-            writer.println("<MusicBand>" +
+            writer.println("<musicband>" +
                     "\n<id>" + mB.getFrontMan().getPassportID() + "</id>"+
                     "\n<name>" + mB.getName() + "</name>"+
                     "\n<coordinates>\n\t<x>" + mB.getCoordinates().getX() + "</x>\n\t<y>" + mB.getCoordinates().getY()+
@@ -74,7 +74,7 @@ public class MapToXML {
                     "\n\t<weight>" + mB.getFrontMan().getWeight() + "</weight>"+
                     "\n\t<passportID>" + mB.getFrontMan().getPassportID() + "</passportID>"+
                     "\n</frontMan>"+
-                    "\n</MusicBand>");
+                    "\n</musicband>");
         }
     }
 }

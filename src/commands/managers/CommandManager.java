@@ -15,6 +15,10 @@ public class CommandManager {
         commandMap.put("help", new HelpCommand());
         commandMap.put("info", new InfoCommand());
         commandMap.put("save", new SaveCommand());
+        commandMap.put("show", new ShowCommand());
+        commandMap.put("replace_if_low_now", new IfLowCommand());
+        commandMap.put("remove_key", new RemoveCommand());
+
     }
 
     /**

@@ -1,6 +1,7 @@
 package userInteraction;
 
 import collection.CollectionManager;
+import collection.baseClasses.MusicBand;
 import commands.managers.Command;
 import commands.managers.CommandManager;
 import fileInteraction.MapToXML;
@@ -8,10 +9,8 @@ import fileInteraction.XMLToMap;
 import userInteraction.input.InputHandler;
 import userInteraction.input.ReadBase;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.stream.Collectors;
 
 
 public class Manager {
@@ -29,17 +28,12 @@ public class Manager {
         }
         commM = new CommandManager();
         mtx = new MapToXML();
-        collM = new CollectionManager(this, tNow, commM, mtx);
     }
-    public Manager(String file){
-        initlReading(file);
+    public Manager(String filePath){
+        collM = new CollectionManager(this, tNow, commM, mtx, filePath);
     }
     public String[] getInput(){
         return input;
-    }
-    public void initlReading(String file){
-        XMLToMap xml = new XMLToMap();
-        xml.readXmlFile(file);
     }
 
     public void start(){

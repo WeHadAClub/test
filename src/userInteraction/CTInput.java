@@ -3,6 +3,7 @@ package userInteraction;
 import collection.baseClasses.Coordinates;
 import collection.baseClasses.MusicGenre;
 import collection.baseClasses.Person;
+import exeptions.NoKeyExeptions;
 import exeptions.WrongInputFormat;
 import exeptions.NullFieldExeption;
 import userInteraction.input.InputHandler;
@@ -30,6 +31,31 @@ public class CTInput {
         catch (NumberFormatException ex){
             System.out.println("Задайте ключ целочисленным значением!");
             return false;
+        }
+    }
+    //ЗАМЕНИТЬ!!!
+    public Long lowCompareKey(InputHandler t2, Integer oldKey){
+        while(true){
+            try{
+                String[] in = t2.read();
+                if(in.length == 0) throw new NoKeyExeptions();
+                if(!checkKey(in[0])) return null;
+                Long key = Long.valueOf(in[0]);
+                if(key < oldKey){
+                    System.out.println("Ключ удовлетворяет условию.\nРазрешен ввод полей элемента колекции.\n");
+                    return key;
+                }
+                else{
+                    System.out.println("Введенный ключ не меньше исходного. Замена отменена");
+                    return null;
+                }
+            }
+            catch (NoKeyExeptions e){
+                System.out.println("Вы не ввели ключ!\nПопробуйте еще раз:");
+            }
+            catch(NumberFormatException e){
+                System.out.println("Ключ должен быть целым числом!\nПопробуйте еще раз:");
+            }
         }
     }
 
