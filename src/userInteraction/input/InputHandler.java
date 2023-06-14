@@ -3,13 +3,23 @@ import javax.xml.parsers.*;
 import org.xml.sax.*;
 import org.w3c.dom.*;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class InputHandler{
-    ReadBase handler;
+    ReadBase handler; //база чтения
     String[] words;
     public InputHandler(ReadBase n) throws IOException{
         handler = n;
+    }
+    public InputHandler(String path){
+        try{
+            handler = new ReadBase(new FileInputStream(path));
+        }
+        catch (FileNotFoundException e){
+            System.out.println("Файла с таким названием нет");
+        }
     }
 
     /**
@@ -27,5 +37,17 @@ public class InputHandler{
         } catch (IOException e) {
             return new String[0];
         }
+    }
+
+    public String readLine(){
+        try {
+            return handler.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean ready(){
+        return handler.ready();
     }
 }

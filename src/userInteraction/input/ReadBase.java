@@ -1,8 +1,6 @@
 package userInteraction.input;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
  * the class on which the reading of files is based
@@ -12,14 +10,14 @@ public class ReadBase {
     /**
      * f - поле потока ввода
      */
-    private InputStreamReader f;
+    private InputStreamReader reader;
 
     /**
      *
      * @param is - Input Stream
      */
     public ReadBase(InputStream is){
-        f = new InputStreamReader(is);
+        reader = new InputStreamReader(is);
     }
 
     /**
@@ -28,13 +26,13 @@ public class ReadBase {
      * @throws IOException
      */
     public String read() throws IOException {
-        int rn = f.read();
+        int rn = reader.read();
         String str = Character.toString((char)rn);
         String test = "";
 
         //все символы совмещаются в одну строку
-        while(f.ready()){
-            rn = f.read();
+        while(reader.ready()){
+            rn = reader.read();
             test = Character.toString((char)rn);
             if(!test.equals("\n")){
                 str += test;
@@ -47,7 +45,28 @@ public class ReadBase {
         else{
             return null;
         }
+
     }
 
+    public String readLine() throws IOException {
+        StringBuilder str = new StringBuilder();
+        while(reader.ready()) {
+            int a = reader.read();
+            String now = Character.toString((char) a);
+            if(now.equals("\n")){
+                break;
+            }
+            str.append(now);
+        }
+        String fin = String.valueOf(str);
+        return fin;
+    }
 
+    public boolean ready(){
+        try {
+            return reader.ready();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
