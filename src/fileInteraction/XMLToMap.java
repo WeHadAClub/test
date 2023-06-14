@@ -20,7 +20,12 @@ public class XMLToMap {
         MusicBand mb = new MusicBand();
         Coordinates crd = new Coordinates();
         Person frontman = new Person();
-        InputHandler fileRead = new InputHandler(file);
+        InputHandler fileRead = null;
+        try {
+            fileRead = new InputHandler(file);
+        } catch (FileNotFoundException e) {
+            System.out.println("Нет файла с таким именем\n");;
+        }
         int k = 0;
         boolean flag = true; //для проверки корректности ввода
         while (fileRead.ready()) {

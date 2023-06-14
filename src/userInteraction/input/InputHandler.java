@@ -13,13 +13,8 @@ public class InputHandler{
     public InputHandler(ReadBase n) throws IOException{
         handler = n;
     }
-    public InputHandler(String path){
-        try{
-            handler = new ReadBase(new FileInputStream(path));
-        }
-        catch (FileNotFoundException e){
-            System.out.println("Файла с таким названием нет");
-        }
+    public InputHandler(String path) throws FileNotFoundException {
+        handler = new ReadBase(new FileInputStream(path));
     }
 
     /**

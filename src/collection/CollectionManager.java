@@ -1,6 +1,8 @@
 package collection;
 
 import collection.baseClasses.MusicBand;
+import collection.baseClasses.MusicGenre;
+import commands.managers.Command;
 import commands.managers.CommandManager;
 import exeptions.NoKeyExeptions;
 import exeptions.WrongInputFormat;
@@ -9,7 +11,10 @@ import fileInteraction.XMLToMap;
 import userInteraction.CTInput;
 import userInteraction.Manager;
 import userInteraction.input.InputHandler;
+import userInteraction.input.ReadBase;
 
+import java.beans.IntrospectionException;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -59,6 +64,31 @@ public class CollectionManager {
         }
     }
 
+    public void genreRemove() throws WrongInputFormat {
+        String[] input = mainManager.getInput();
+        if(input.length == 1) throw new WrongInputFormat();
+        String isGr = input[1];
+        MusicGenre genre;
+        try{
+             genre = MusicGenre.valueOf(isGr);
+        }
+        catch(IllegalArgumentException e){
+            System.out.println("Такой музыкальный жанр не поддерживается.\n");
+            return;
+        }
+        Set<Integer> keys = musicBandCatalogue.keySet();
+        if(keys.isEmpty()){
+            System.out.println("Коллекция пуста\n");
+            return;
+        }
+        for(Integer key: keys) {
+            MusicBand mb = musicBandCatalogue.get(key);
+            if (mb.getGenre() == genre) {
+                musicBandCatalogue.remove(key);
+            }
+        }
+        System.out.println("Все элементы жанра " + isGr + " удалены из коллекции.");
+    }
     public void iflow() throws NoKeyExeptions, WrongInputFormat {
         String[] input = mainManager.getInput();
         if(input.length == 1) throw new NoKeyExeptions();
@@ -136,7 +166,24 @@ public class CollectionManager {
         }
     }
 
+    public void executeScript() throws WrongInputFormat, FileNotFoundException {
+        String[] input = mainManager.getInput();
+        CommandManager cm = new CommandManager();
+        Command command;
+        final int MAX_SCRIPT_TRANSITION_COUNT = 100;
+        int scriptTransitionCount = 0;
 
+
+        if(input.length == 1) throw new WrongInputFormat();
+        String file = input[1];
+        InputHandler readF = new InputHandler(file);
+        String[] input2 = readF.read();
+        if(cm.isCommand(input2[0])){
+            System.out.println(input2[0]);
+            command = cm.getCommand(input2[0]);
+            command.execute(this);
+        }
+    }
     public void exit(){
         System.out.println("Завершаем работу");
         System.exit(0);
