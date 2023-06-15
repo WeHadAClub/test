@@ -1,8 +1,4 @@
 package userInteraction.input;
-import javax.xml.parsers.*;
-import org.xml.sax.*;
-import org.w3c.dom.*;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,9 +23,7 @@ public class InputHandler{
             words = handler.read().split(" ");
             return words;
         }
-        catch (NullPointerException e){
-            return new String[0];
-        } catch (IOException e) {
+        catch (NullPointerException | IOException e){
             return new String[0];
         }
     }

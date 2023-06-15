@@ -11,19 +11,23 @@ import fileInteraction.XMLToMap;
 import userInteraction.CTInput;
 import userInteraction.Manager;
 import userInteraction.input.InputHandler;
-import userInteraction.input.ReadBase;
 
-import java.beans.IntrospectionException;
+
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class CollectionManager {
+    final int MAX_SCRIPT_TRANSITION_COUNT = 3;
+
     Map<Integer, MusicBand> musicBandCatalogue = new LinkedHashMap<>();
+    int scriptTransitionCount = 0;
     private final Manager mainManager;
     private final CTInput checker;
+
     private final InputHandler t2;
     private final CommandManager cM;
     private final java.time.LocalDateTime creationDate;
@@ -64,8 +68,7 @@ public class CollectionManager {
         }
     }
 
-    public void genreRemove() throws WrongInputFormat {
-        String[] input = mainManager.getInput();
+    public void genreRemove(String[] input) throws WrongInputFormat {
         if(input.length == 1) throw new WrongInputFormat();
         String isGr = input[1];
         MusicGenre genre;
@@ -89,8 +92,7 @@ public class CollectionManager {
         }
         System.out.println("Все элементы жанра " + isGr + " удалены из коллекции.");
     }
-    public void iflow() throws NoKeyExeptions, WrongInputFormat {
-        String[] input = mainManager.getInput();
+    public void iflow(String[] input) throws NoKeyExeptions, WrongInputFormat {
         if(input.length == 1) throw new NoKeyExeptions();
         if(musicBandCatalogue.isEmpty()) {
             System.out.println("Невозможно выполнить комманду - коллекция пуста.\n");
@@ -124,8 +126,7 @@ public class CollectionManager {
 
     }
 
-    public void remove_key() throws NoKeyExeptions{
-        String[] input = mainManager.getInput();
+    public void remove_key(String[] input) throws NoKeyExeptions{
         if(input.length == 1) throw new NoKeyExeptions();
         try{
             Integer key = Integer.valueOf(input[1]);
@@ -139,8 +140,7 @@ public class CollectionManager {
             System.out.println("Элемента с таким ключом нет в коллекции\n");
         }
     }
-    public void add() throws NoKeyExeptions {
-        String[] input = mainManager.getInput();
+    public void add(String[] input) throws NoKeyExeptions {
         if(input.length == 1) throw new NoKeyExeptions();
         String cKey = input[1];
         if(!checker.checkKey(cKey)){
@@ -166,22 +166,26 @@ public class CollectionManager {
         }
     }
 
-    public void executeScript() throws WrongInputFormat, FileNotFoundException {
-        String[] input = mainManager.getInput();
+    public void executeScript(String[] input) throws WrongInputFormat, FileNotFoundException {
         CommandManager cm = new CommandManager();
         Command command;
-        final int MAX_SCRIPT_TRANSITION_COUNT = 100;
-        int scriptTransitionCount = 0;
-
-
         if(input.length == 1) throw new WrongInputFormat();
-        String file = input[1];
-        InputHandler readF = new InputHandler(file);
-        String[] input2 = readF.read();
-        if(cm.isCommand(input2[0])){
-            System.out.println(input2[0]);
-            command = cm.getCommand(input2[0]);
-            command.execute(this);
+        String file = input[1]; //имя файла
+        InputHandler readF = new InputHandler(file); //тут может вылететь ошибка FileNotFoundException
+        while(readF.ready()){
+            String[] input2 = readF.read();
+            if(cm.isCommand(input2[0])){
+                if(Objects.equals(input2[0], "execute_script")){
+                    scriptTransitionCount += 1;
+                }
+                if(scriptTransitionCount > MAX_SCRIPT_TRANSITION_COUNT){
+                    System.out.println("Произошло зацикливание. Выполнение команды остановлено\n");
+                    scriptTransitionCount = 0;
+                    return;
+                }
+                command = cm.getCommand(input2[0]);
+                command.execute(this, input2);
+            }
         }
     }
     public void exit(){

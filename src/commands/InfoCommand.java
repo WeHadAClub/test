@@ -9,7 +9,7 @@ public class InfoCommand implements Command {
         return "info - вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов)";
     }
     @Override
-    public void execute(CollectionManager mg) {
+    public void execute(CollectionManager mg, String[] input) {
         mg.info();
     }
 }

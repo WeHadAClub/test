@@ -45,7 +45,7 @@ public class Manager {
             try {
                 if(commM.isCommand(input[0])){
                     command = commM.getCommand(input[0]);
-                    command.execute(collM);
+                    command.execute(collM, input);
                 }
             }
             catch (ArrayIndexOutOfBoundsException e){

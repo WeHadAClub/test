@@ -29,22 +29,23 @@ public class ReadBase {
         int rn = reader.read();
         String str = Character.toString((char)rn);
         String test = "";
+        String test2 = "";
+        String isN;
 
         //все символы совмещаются в одну строку
         while(reader.ready()){
             rn = reader.read();
             test = Character.toString((char)rn);
-            if(!test.equals("\n")){
-                str += test;
+            if(reader.ready()){
+                test2 = Character.toString((char)rn);
             }
+            isN = test + test2;
+            if(isN.contains("\n") || rn == 13){
+                break;
+            }
+            str += test;
         }
-        if(!str.equals("\n")) {
-            return str;
-
-        }
-        else{
-            return null;
-        }
+        return str;
 
     }
 
@@ -58,8 +59,7 @@ public class ReadBase {
             }
             str.append(now);
         }
-        String fin = String.valueOf(str);
-        return fin;
+        return String.valueOf(str);
     }
 
     public boolean ready(){

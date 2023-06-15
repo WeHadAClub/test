@@ -9,7 +9,7 @@ public class SaveCommand implements Command {
         return "save - сохраняет файл в файл. Формат ввода: save [filename]";
     }
     @Override
-    public void execute(CollectionManager mg) {
+    public void execute(CollectionManager mg, String[] input) {
         mg.save();
     }
 
