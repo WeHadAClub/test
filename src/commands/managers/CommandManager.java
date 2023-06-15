@@ -18,7 +18,8 @@ public class CommandManager {
         commandMap.put("show", new ShowCommand());
         commandMap.put("replace_if_low_now", new IfLowCommand());
         commandMap.put("remove_key", new RemoveCommand());
-
+        commandMap.put("remove_all_by_genre", new RemByGenreCommand());
+        commandMap.put("execute_script", new ExecuteScript());
     }
 
     /**
