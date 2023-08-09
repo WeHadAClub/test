@@ -12,7 +12,9 @@ import userInteraction.input.ReadBase;
 import java.io.*;
 import java.util.stream.Collectors;
 
-
+/**
+ * The main manager who delegates tasks to other managers. In fact, it is the starting point of the program
+ */
 public class Manager {
     private InputHandler tNow;
     private final CommandManager commM;

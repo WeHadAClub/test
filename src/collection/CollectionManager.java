@@ -20,6 +20,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * collection manager. In the classroom, all commands are executed and direct interaction with the collection takes place
+ */
 public class CollectionManager {
     final int MAX_SCRIPT_TRANSITION_COUNT = 3;
 
@@ -92,6 +95,20 @@ public class CollectionManager {
         }
         System.out.println("Все элементы жанра " + isGr + " удалены из коллекции.");
     }
+    public void average(){
+        Set<Integer> keys = musicBandCatalogue.keySet();
+        long sumNop = 0;
+        if(keys.isEmpty()){
+            System.out.println("Коллекция пуста\n");
+            return;
+        }
+        for(Integer key: keys) {
+            MusicBand mb = musicBandCatalogue.get(key);
+            sumNop += mb.getNumberOfParticipants();
+        }
+        float averSum = (float) sumNop/musicBandCatalogue.size();
+        System.out.println("Среднее значение поля numberOfParticipants для всех элементов равно: " + averSum);
+    }
     public void iflow(String[] input) throws NoKeyExeptions, WrongInputFormat {
         if(input.length == 1) throw new NoKeyExeptions();
         if(musicBandCatalogue.isEmpty()) {
@@ -122,8 +139,93 @@ public class CollectionManager {
         catch(NumberFormatException e){
             System.out.println("Ключ должен быть целым числом");
         }
+    }
 
+    public void remGreatLow(String[] input) throws NoKeyExeptions, WrongInputFormat {
+        if (input.length == 1) throw new NoKeyExeptions();
+        if (!checker.checkKey(input[1])) return;
 
+        Integer mainKay = Integer.valueOf(input[1]);
+        if (!musicBandCatalogue.containsKey(mainKay)) throw new WrongInputFormat();
+        Set<Integer> keys = musicBandCatalogue.keySet();
+        if (keys.isEmpty()) {
+            System.out.println("Коллекция пуста\n");
+            return;
+        }
+        MusicBand mainBand = musicBandCatalogue.get(mainKay);
+        int k = 0;
+        for (Integer key : keys) {
+            MusicBand secBand = musicBandCatalogue.get(key);
+            if (input[0].equals("remove_greater")) {
+                if (mainBand.compareTo(secBand) < 0) {
+                    musicBandCatalogue.remove(key);
+                    System.out.println("sksv");
+                    k++;
+                }
+            } else if (input[0].equals("remove_lower")) {
+                if (mainBand.compareTo(secBand) > 0) {
+                    musicBandCatalogue.remove(key);
+                    k++;
+                }
+            }
+        }
+        if (input[0].equals("remove_lower")){
+            if (k == 0) {
+                System.out.println("Нет элементов, меньших чем заданный");
+            }
+            else{
+                System.out.println("Элементы коллекции, меньшие " + mainBand.getName() + ", были удалены");
+            }
+        }
+        else if(input[0].equals("remove_greater")){
+            if (k == 0) {
+                System.out.println("Нет элементов, больших чем заданный");
+            }
+            else{
+                System.out.println("Элементы коллекции, большие " + mainBand.getName() + ", были удалены");
+            }
+        }
+    }
+
+    public void filter(String[] input) throws NoKeyExeptions, NumberFormatException{
+        if(input.length == 1) throw new NoKeyExeptions();
+        Long nop = Long.valueOf(input[1]);
+        Set<Integer> keys = musicBandCatalogue.keySet();
+        if(keys.isEmpty()){
+            System.out.println("Коллекция пуста\n");
+            return;
+        }
+        for(Integer key: keys) {
+            MusicBand mb = musicBandCatalogue.get(key);
+            if(mb.getNumberOfParticipants() < nop){
+                System.out.println("Музыкальные группы, количество участников которых меньше чем " + nop + ":");
+                System.out.println(mb + "\n");
+            }
+        }
+    }
+    public void update(String[] input) throws NoKeyExeptions{
+        if(input.length == 1) throw new NoKeyExeptions();
+        String cKey = input[1];
+        if(!checker.checkKey(cKey)){
+            return;
+        }
+        if(!musicBandCatalogue.containsKey(Integer.valueOf(input[1]))){
+            System.out.println("В коллекции нет элемента с таким ключом. Команда отменена");
+            return;
+        }
+        MusicBand mb = new MusicBand();
+        mb.setId(Long.valueOf(cKey));
+        mb.setName(checker.setName(t2));
+        mb.setCoordinates(checker.setCoordinates(t2));
+        mb.setNumberOfParticipants(checker.setNOP(t2));
+        mb.setGenre(checker.setMG(t2));
+        mb.setFrontMan(checker.personality(t2, cKey));
+        musicBandCatalogue.put(Integer.valueOf(cKey), mb);
+        System.out.println("Музыкальный коллектив под ключом " + cKey + " обновлен");
+    }
+    public void clear(){
+        musicBandCatalogue.clear();
+        System.out.println("Коллекция очищена\n");
     }
 
     public void remove_key(String[] input) throws NoKeyExeptions{

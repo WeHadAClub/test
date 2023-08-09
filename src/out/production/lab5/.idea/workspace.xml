@@ -1,26 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="595282fa-5b2c-4dd1-a3b8-e06070f989b1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/lab5/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/lab5/collection/CollectionManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/lab5/collection/baseClasses/Coordinates.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/lab5/collection/baseClasses/MusicBand.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/lab5/collection/baseClasses/MusicGenre.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/lab5/collection/baseClasses/Person.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/lab5/commands/ExitCommand.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/lab5/commands/InsertCommand.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/lab5/commands/managers/Command.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/lab5/commands/managers/CommandManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../out/production/lab5/userInteraction/Manager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collection/baseClasses/MusicBand.java" beforeDir="false" afterPath="$PROJECT_DIR$/collection/baseClasses/MusicBand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileInteraction/MapToXML.java" beforeDir="false" afterPath="$PROJECT_DIR$/fileInteraction/MapToXML.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileInteraction/XMLToMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/fileInteraction/XMLToMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userInteraction/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/userInteraction/Manager.java" afterDir="false" />
-    </list>
+    <list default="true" id="595282fa-5b2c-4dd1-a3b8-e06070f989b1" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,14 +22,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/javalabs/lab5&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/javalabs/test",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -57,6 +45,9 @@
       <workItem from="1684999513467" duration="24000" />
       <workItem from="1685001070737" duration="23000" />
       <workItem from="1685001479570" duration="25000" />
+      <workItem from="1685020676254" duration="68000" />
+      <workItem from="1686663217130" duration="409000" />
+      <workItem from="1686753606946" duration="1210000" />
     </task>
     <servers />
   </component>

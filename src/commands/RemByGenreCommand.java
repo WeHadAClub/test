@@ -10,9 +10,9 @@ public class RemByGenreCommand implements Command {
         return "remove_all_by_genre [genre_name]- удалить из коллекции все элементы, значение поля genre которого эквивалентно заданному";
     }
     @Override
-    public void execute(CollectionManager mg) {
+    public void execute(CollectionManager mg, String[] input) {
         try {
-            mg.genreRemove();
+            mg.genreRemove(input);
         } catch (WrongInputFormat e) {
             System.out.println("Вы не ввели жанр!\n");
         }

@@ -12,9 +12,9 @@ public class ExecuteScript implements Command {
         return "execute_script [file_name]- считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.";
     }
     @Override
-    public void execute(CollectionManager mg) {
+    public void execute(CollectionManager mg, String[] input) {
         try {
-            mg.executeScript();
+            mg.executeScript(input);
         } catch (WrongInputFormat e) {
             System.out.println("Вы не ввели название файла");
         } catch (FileNotFoundException e) {

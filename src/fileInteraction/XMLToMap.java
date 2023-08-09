@@ -14,6 +14,10 @@ import java.time.format.DateTimeParseException;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ *A class that translates an xml file into a collection (if the restrictions are met)
+ *
+ */
 public class XMLToMap {
 
     public void readFromX(String file, Map<Integer, MusicBand> baseColl) {
@@ -24,7 +28,7 @@ public class XMLToMap {
         try {
             fileRead = new InputHandler(file);
         } catch (FileNotFoundException e) {
-            System.out.println("Нет файла с таким именем\n");;
+            System.out.println("Нет файла с таким именем\n");
         }
         int k = 0;
         boolean flag = true; //для проверки корректности ввода

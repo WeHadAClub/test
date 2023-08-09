@@ -3,6 +3,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * The incoming stream handler class. It has the read, readLine methods
+ */
 public class InputHandler{
     ReadBase handler; //база чтения
     String[] words;
